@@ -81,7 +81,7 @@ async function initAuth() {
   if (!window.msal) { setSync('err', 'offline'); return !!S.lastSync; }
   msalApp = new msal.PublicClientApplication({
     auth: { clientId: CFG.clientId, authority: `https://login.microsoftonline.com/${CFG.tenantId || 'organizations'}`,
-            redirectUri: location.origin + location.pathname, navigateToLoginRequestUrl: false },
+            redirectUri: location.origin + location.pathname.replace(/index\.html$/, ''), navigateToLoginRequestUrl: false },
     cache: { cacheLocation: 'localStorage', storeAuthStateInCookie: true }
   });
   await msalApp.initialize();
